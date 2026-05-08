@@ -1,10 +1,8 @@
 package com.example.l5_20233564.controller;
 
 import com.example.l5_20233564.entity.Customer;
-import com.example.l5_20233564.entity.Invoice;
 import com.example.l5_20233564.entity.Product;
 import com.example.l5_20233564.repository.CustomerRepository;
-import com.example.l5_20233564.repository.InvoiceRepository;
 import com.example.l5_20233564.repository.ProductRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,49 +17,46 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 public class ProductController {
     @Autowired
-    private InvoiceRepository invoiceRepository;
-    //@Autowired
-    //private CursoRepository cursoRepository;
-    //@Autowired
-    //private EstudianteRepository estudianteRepository;
-    @GetMapping("/invoices/lista")
-    public String listarInvoices(Model model) {
-        model.addAttribute("invoices", invoiceRepository.findAll());
-        return "invoices/lista";
+    private ProductRepository productRepository;
+
+    @GetMapping("/products/lista")
+    public String listarProducts(Model model) {
+        model.addAttribute("products", productRepository.findAll());
+        return "products/lista";
     }
 
-    @GetMapping("/invoices/nuevo")
-    public String nuevoInvoices(Model model) {
-        model.addAttribute("invoice", new Invoice());
-        return "invoices/formulario";
+    @GetMapping("/products/nuevo")
+    public String nuevoProduct(Model model) {
+        model.addAttribute("product", new Product());
+        return "products/formulario";
     }
 
-    @PostMapping("/invoices/guardar")
-    public String guardarInvoices(@Valid @ModelAttribute Invoice invoice, BindingResult result, RedirectAttributes redirectAttributes) {
+    @PostMapping("/products/guardar")
+    public String guardarProducts(@Valid @ModelAttribute Product product, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
-            return "invoices/formulario";
+            return "products/formulario";
         }
-        invoiceRepository.save(invoice);
+        productRepository.save(product);
         redirectAttributes.addFlashAttribute(
                 "mensaje",
-                "Comprobante guardado correctamente");
-        return "redirect:/invoices/lista";
+                "Producto guardado correctamente");
+        return "redirect:/products/lista";
     }
 
-    @GetMapping("/invoices/editar/{id}")
-    public String editarInvoices(@PathVariable Integer id, Model model) {
-        Invoice invoice=invoiceRepository.findById(id).orElse(null);
-        model.addAttribute("invoice",invoice);
-        return  "invoices/formulario";
+    @GetMapping("/products/editar/{id}")
+    public String editarProducts(@PathVariable Integer id, Model model) {
+        Product product=productRepository.findById(id).orElse(null);
+        model.addAttribute("product",product);
+        return  "products/formulario";
     }
-    @GetMapping("/invoices/eliminar/{id}")
-    public String eliminarInvoices(@PathVariable Integer id, Model model, RedirectAttributes redirectAttributes) {
+    @GetMapping("/products/eliminar/{id}")
+    public String eliminarProducts(@PathVariable Integer id, Model model, RedirectAttributes redirectAttributes) {
         //matriculaRepository.deleteByCurso_Id(id);
-        invoiceRepository.deleteById(id);
+        productRepository.deleteById(id);
 
         redirectAttributes.addFlashAttribute(
                 "mensaje",
-                "Comprobante eliminado correctamente");
-        return "redirect:/invoices/lista";
+                "Producto eliminado correctamente");
+        return "redirect:/products/lista";
     }
 }
