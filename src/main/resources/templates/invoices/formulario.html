@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Nuevo Comprobante</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+<div class="bg-white w-[500px] p-8 rounded-2xl shadow-xl">
+
+    <h2 class="text-3xl font-bold text-center text-blue-600 mb-8">
+        Nuevo Comprobante
+    </h2>
+
+    <form th:action="@{/invoices/guardar}"
+          th:object="${invoice}"
+          method="post"
+          class="space-y-5">
+
+        <input type="hidden" th:field="*{id}">
+
+
+
+        <div>
+
+            <label class="block font-semibold mb-2 text-gray-700">
+                Tipo
+            </label>
+
+            <select th:field="*{document_type}"
+                    class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+                <option value="BOLETA">
+                    BOLETA
+                </option>
+
+                <option value="FACTURA">
+                    FACTURA
+                </option>
+
+            </select>
+
+            <span class="text-red-500 text-sm"
+                  th:if="${#fields.hasErrors('document_type')}"
+                  th:errors="*{document_type}">
+            </span>
+
+        </div>
+        <div>
+
+            <label class="block font-semibold mb-2 text-gray-700">
+                Fecha
+            </label>
+
+            <input type="date"
+                   th:field="*{date}"
+                   class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+            <span class="text-red-500 text-sm"
+                  th:if="${#fields.hasErrors('date')}"
+                  th:errors="*{date}">
+            </span>
+
+        </div>
+
+
+
+
+        <div class="flex gap-3 pt-3">
+
+            <button type="submit"
+                    class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">
+
+                Guardar
+
+            </button>
+
+            <a th:href="@{/invoices/lista}"
+               class="flex-1 text-center bg-gray-300 hover:bg-gray-400 text-black font-bold py-3 rounded-lg transition">
+
+                Volver
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html></html>
