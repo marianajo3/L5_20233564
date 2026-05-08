@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Nuevo Producto</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+<div class="bg-white w-[500px] p-8 rounded-2xl shadow-xl">
+
+    <h2 class="text-3xl font-bold text-center text-blue-600 mb-8">
+        Nuevo Producto
+    </h2>
+
+    <form th:action="@{/products/guardar}"
+          th:object="${product}"
+          method="post"
+          class="space-y-5">
+
+        <input type="hidden" th:field="*{id}">
+
+
+        <div>
+
+            <label class="block font-semibold mb-2 text-gray-700">
+                Nombre
+            </label>
+
+            <input type="text"
+                   th:field="*{name}"
+                   class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+            <span class="text-red-500 text-sm"
+                  th:if="${#fields.hasErrors('name')}"
+                  th:errors="*{name}">
+            </span>
+
+        </div>
+
+        <div>
+
+            <label class="block font-semibold mb-2 text-gray-700">
+                Precio
+            </label>
+
+            <input type="number"
+                   th:field="*{price}"
+                   class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+            <span class="text-red-500 text-sm"
+                  th:if="${#fields.hasErrors('price')}"
+                  th:errors="*{price}">
+            </span>
+
+        </div>
+
+        <div>
+
+            <label class="block font-semibold mb-2 text-gray-700">
+                Stock
+            </label>
+
+            <input type="number"
+                   th:field="*{stock}"
+                   class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+            <span class="text-red-500 text-sm"
+                  th:if="${#fields.hasErrors('stock')}"
+                  th:errors="*{stock}">
+            </span>
+
+        </div>
+
+
+        <div class="flex gap-3 pt-3">
+
+            <button type="submit"
+                    class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition">
+
+                Guardar
+
+            </button>
+
+            <a th:href="@{/products/lista}"
+               class="flex-1 text-center bg-gray-300 hover:bg-gray-400 text-black font-bold py-3 rounded-lg transition">
+
+                Volver
+
+            </a>
+
+        </div>
+
+    </form>
+
+</div>
+
+</body>
+</html></html>

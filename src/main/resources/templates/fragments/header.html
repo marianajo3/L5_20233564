@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+<div th:fragment="navbar"
+     class="bg-blue-700 text-white shadow-lg">
+
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+
+    <h1 class="text-2xl font-bold tracking-wide">
+      Sistema de facturacion electronica
+    </h1>
+
+    <div class="flex gap-6 text-lg font-medium">
+
+      <a th:href="@{/customers/lista}"
+         class="hover:text-yellow-300 transition">
+
+        Clientes
+
+      </a>
+
+      <a th:href="@{/products/lista}"
+         class="hover:text-yellow-300 transition">
+
+        Productos
+
+      </a>
+
+      <a th:href="@{/comprobantes/lista}"
+         class="hover:text-yellow-300 transition">
+
+        Comprobantes
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

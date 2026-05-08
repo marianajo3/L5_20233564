@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Lista Clientes</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+
+<div th:replace="~{fragments/header :: navbar}"></div>
+
+<div class="max-w-5xl mx-auto mt-10 bg-white p-8 rounded-2xl shadow-xl">
+
+
+    <div class="flex justify-between items-center mb-6">
+
+        <h2 class="text-3xl font-bold text-blue-600">
+            Lista de Clientes
+        </h2>
+
+        <a th:href="@{/customers/nuevo}"
+           class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg font-semibold transition">
+
+            + Nuevo Cliente
+
+        </a>
+
+    </div>
+
+
+    <div th:if="${mensaje}"
+         th:text="${mensaje}"
+         class="bg-green-100 text-green-700 p-3 rounded-lg mb-5">
+    </div>
+
+
+    <div class="overflow-x-auto">
+
+        <table class="w-full border-collapse overflow-hidden rounded-xl">
+
+            <thead>
+
+            <tr class="bg-blue-600 text-white">
+
+                <th class="p-4 text-left">ID</th>
+
+                <th class="p-4 text-left">
+                    Nombre
+                </th>
+
+                <th class="p-4 text-left">
+                    Tipo
+                </th>
+
+                <th class="p-4 text-left">
+                    Documento
+                </th>
+
+
+                <th class="p-4 text-center">
+                    Acciones
+                </th>
+
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="c : ${customers}"
+                class="border-b hover:bg-gray-50 transition">
+
+                <td class="p-4"
+                    th:text="${c.id}">
+                </td>
+
+                <td class="p-4 font-medium"
+                    th:text="${c.name}">
+                </td>
+
+                <td class="p-4"
+                    th:text="${c.document_type}">
+                </td>
+
+                <td class="p-4"
+                    th:text="${c.document}">
+                </td>
+
+                <td class="p-4">
+
+                    <div class="flex justify-center gap-3">
+
+                        <a th:href="@{/customers/editar/{id}(id=${c.id})}"
+                           class="bg-yellow-400 hover:bg-yellow-500 text-black px-4 py-2 rounded-lg font-semibold transition">
+
+                            Editar
+
+                        </a>
+
+                        <a th:href="@{/customers/eliminar/{id}(id=${c.id})}"
+                           onclick="return confirm('¿Eliminar cliente?')"
+                           class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold transition">
+
+                            Eliminar
+
+                        </a>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+</html>
